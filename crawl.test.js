@@ -26,7 +26,7 @@ let baseUrl2 = "microsoft.net";
 let testHtmlBody2 = '<html><body> <a href="/windows">example url<a/> </body></html>';
 
 let baseUrl3 = "yahoo.com";
-let testHtmlBody3 = '<html><body> <a href="/mail">example url<a/> </body></html>';
+let testHtmlBody3 = '<html><body> <a href="/mail">example url<a/> <a href="/search"></a> </body></html>';
 
 test ("first test", () => {
 	expect(getUrlFromHtml(testHtmlBody1, baseUrl1)).toBe("grelou.com/grelou");

@@ -1,5 +1,5 @@
 # JavaScript WebCrawler
 
-This is my firstProject in JavaScript.
+This is my first project in JavaScript.
 
 A WebCrawler using node.js.

@@ -17,7 +17,14 @@ function getUrlFromHtml(htmlBody, baseUrl){
 
 	const dom = new JSDOM(htmlBody);
 	let foundUrls = dom.window.document.querySelectorAll('a');
-	return baseUrl + foundUrls[0];
+	
+
+	for (let i of foundUrls)
+	{
+		return (baseUrl+ i);
+	};
+
+	//return baseUrl + foundUrls[0];
 }
 
 
