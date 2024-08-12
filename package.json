@@ -7,13 +7,16 @@
     "start": "node main.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
-  "jest":{
-	  "transform":{}
+  "jest": {
+    "transform": {}
   },
   "type": "module",
   "author": "ichahiin",
   "license": "ISC",
   "devDependencies": {
     "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "jsdom": "^24.1.1"
   }
 }

@@ -1,7 +1,4 @@
-//import url from 'node:url';
-
-
-//const url1 = "http://example.com/path/";
+import {JSDOM} from 'jsdom';
 
 
 function urlNormalizer(anyUrl)
@@ -16,8 +13,13 @@ function urlNormalizer(anyUrl)
 	return (myUrl.hostname + myUrl.pathname);
 }
 
+function getUrlFromHtml(htmlBody, baseUrl){
 
-//urlNormalizer(url1);
+	const dom = new JSDOM(htmlBody);
+	let foundUrls = dom.window.document.querySelectorAll('a');
+	return baseUrl + foundUrls[0];
+}
+
 
 
 
@@ -81,3 +83,4 @@ console.log(`URL3 = ${urlNormalizer(url3)}`);
 console.log(`URL4 = ${urlNormalizer(url4)}`);
 */
 export {urlNormalizer};
+export {getUrlFromHtml};
