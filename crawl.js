@@ -4,6 +4,7 @@ import {JSDOM} from 'jsdom';
 function urlNormalizer(anyUrl)
 {
 	const myUrl = new URL (anyUrl);
+	console.log("Received url: " + myUrl)
 
 	if (myUrl.pathname.endsWith("/"))
 	{
@@ -27,8 +28,41 @@ function getUrlFromHtml(htmlBody, baseUrl){
 	//return baseUrl + foundUrls[0];
 }
 
+async function crawlPage(currentUrl) {
+	try {
+		const response = await fetch(currentUrl,{
+			headers: {
+			"Content-Type": "text/html"
+			}
+		});
 
+		const dataReceived = await response.text();
+		const contentType = await response.headers.get("content-type");
 
+		if (!response.ok)
+		{
+			throw new Error ("Error: Response Status: " + response.status);
+		}
+
+		else if (!contentType || !contentType.includes("text/html"))
+		{
+			throw new TypeError ("Error: Not Html");
+		}		
+
+		//console.log(dataReceived);
+		return dataReceived
+	
+	}
+
+	catch (err)
+	{
+		console.log(err.message);
+	}
+}
+
+//let thisUrl = "https://wagslane.dev";
+
+//crawlPage(thisUrl)
 
 
 
@@ -91,3 +125,4 @@ console.log(`URL4 = ${urlNormalizer(url4)}`);
 */
 export {urlNormalizer};
 export {getUrlFromHtml};
+export {crawlPage};
