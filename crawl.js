@@ -1,4 +1,5 @@
 import {JSDOM} from 'jsdom';
+import { tsConstructSignatureDeclaration } from '@babel/types';
 
 
 function urlNormalizer(anyUrl)
@@ -13,22 +14,32 @@ function urlNormalizer(anyUrl)
 
 	return (myUrl.hostname + myUrl.pathname);
 }
-
+// Getting a URL from HTML,
 function getUrlFromHtml(htmlBody, baseUrl){
 
 	const dom = new JSDOM(htmlBody);
 	let foundUrls = dom.window.document.querySelectorAll('a');
 	
-
-	for (let i of foundUrls)
-	{
-		return (baseUrl+ i);
-	};
+	return foundUrls;
+	//for (let element of foundUrls)
+	//{
+		//return urlNormalizer(element);
+		//console.log(foundUrls[element]);
+		//return (baseUrl+ i);
+	//};
 
 	//return baseUrl + foundUrls[0];
 }
 
-async function crawlPage(currentUrl) {
+async function crawlPage(baseUrl, currentUrl, pages = {}) {
+	
+	if (currentUrl.hostname !== baseUrl.hostname )
+	{
+		return pages;
+	}
+
+	
+	
 	try {
 		const response = await fetch(currentUrl,{
 			headers: {
@@ -50,8 +61,8 @@ async function crawlPage(currentUrl) {
 		}		
 
 		//console.log(dataReceived);
-		return dataReceived
-	
+		//return dataReceived
+		return getUrlFromHtml(dataReceived, currentUrl);	
 	}
 
 	catch (err)
