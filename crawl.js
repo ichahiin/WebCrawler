@@ -21,14 +21,6 @@ function getUrlFromHtml(htmlBody, baseUrl){
 	let foundUrls = dom.window.document.querySelectorAll('a');
 	
 	return foundUrls;
-	//for (let element of foundUrls)
-	//{
-		//return urlNormalizer(element);
-		//console.log(foundUrls[element]);
-		//return (baseUrl+ i);
-	//};
-
-	//return baseUrl + foundUrls[0];
 }
 
 async function crawlPage(baseUrl, currentUrl, pages = {}) {
