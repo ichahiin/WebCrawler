@@ -15,24 +15,23 @@ function urlNormalizer(anyUrl)
 	return (myUrl.hostname + myUrl.pathname);
 }
 
-// Getting a URL from HTML,
+// Getting a list of URLs from an HTML body.
 function getUrlFromHtml(htmlBody, baseUrl){
 
 	const dom = new JSDOM(htmlBody);
 	let foundUrls = Array.from(dom.window.document.querySelectorAll('a')); // Convert the NodeList to a regualr array.
 	
-	for (let tag in foundUrls)
+	for (let tag in foundUrls)  // Convert Relative URLs to Absolute URLs.
 	{
-		if (foundUrls[tag].hostname)
+		if (foundUrls[tag].hostname)  // Check that found URLs don't have a domain already attached to them.
 		{
-			foundUrls[tag] = foundUrls[tag].toString(); // transform Anchor Elements to strings/text.
-			continue; // continue to not concatenate the baseUrl to it.
+			foundUrls[tag] = foundUrls[tag].toString(); // Convert Anchor Elements to strings/text.
+			continue; // Continue to not concatenate the baseUrl to it.
 		}
 
 		foundUrls[tag] =  baseUrl + foundUrls[tag]; // Appending a string to the an HTMLAnchorEelemnt transforms it into a string.
 	}
-	console.log("FoundURLs: " + foundUrls)
-
+	//console.log("FoundURLs: " + foundUrls);
 	
 	return foundUrls;	  
 }
