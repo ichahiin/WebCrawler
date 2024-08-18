@@ -1,5 +1,5 @@
 //import {urlNormalizer} from "./crawl.js";
-//import {getUrlFromHtml} from "./crawl.js";
+import {getUrlFromHtml} from "./crawl.js";
 //import {argv} from "node:process";
 import {crawlPage} from './crawl.js'
 
@@ -19,7 +19,8 @@ async function main(givenUrl){
 	else
 	{
 		console.log(`Processing : ${givenUrl} \n`);
-		let myVar = await crawlPage(givenUrl);
+		let linksFound= {}
+		let myVar = await crawlPage(givenUrl, givenUrl, linksFound);
 		console.log(myVar)
 		//return  myVar;
 	}

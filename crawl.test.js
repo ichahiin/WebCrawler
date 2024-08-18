@@ -26,7 +26,11 @@ let baseUrl2 = "microsoft.net";
 let testHtmlBody2 = '<html><body> <a href="/windows">example url<a/> </body></html>';
 
 let baseUrl3 = "yahoo.com";
-let testHtmlBody3 = '<html><body> <a href="/mail">example url<a/> <a href="/search"></a> </body></html>';
+let testHtmlBody3 = '<html> <body> <a href="/mail">example url<a/> </body></html>';
+
+let baseUrl4 = "meemo.com";
+let testHtmlBody4 = '<html><body> <a href="/mail"><a/> <a href="/search"></a> </body></html>';
+
 
 test ("first test", () => {
 	expect(getUrlFromHtml(testHtmlBody1, baseUrl1)).toBe("grelou.com/grelou");
@@ -38,6 +42,11 @@ test ("third test", () => {
 	expect(getUrlFromHtml(testHtmlBody3, baseUrl3)).toBe("yahoo.com/mail");
 })
 
+test ("Fourth test", () => {
+	expect(getUrlFromHtml(testHtmlBody4, baseUrl4)).toBe("meemo.com/mail");
+})
+
+//console.log(getUrlFromHtml(testHtmlBody4, baseUrl4));
 
 
 
