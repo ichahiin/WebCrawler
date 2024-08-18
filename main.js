@@ -1,5 +1,5 @@
 //import {urlNormalizer} from "./crawl.js";
-import {getUrlFromHtml} from "./crawl.js";
+//import {getUrlFromHtml} from "./crawl.js";
 //import {argv} from "node:process";
 import {crawlPage} from './crawl.js'
 

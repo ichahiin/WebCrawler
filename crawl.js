@@ -19,8 +19,20 @@ function urlNormalizer(anyUrl)
 function getUrlFromHtml(htmlBody, baseUrl){
 
 	const dom = new JSDOM(htmlBody);
-	let foundUrls = Array.from(dom.window.document.querySelectorAll('a')); // transform the NodeList to a regualr array.
-	console.log("FoundURLs" + foundUrls)
+	let foundUrls = Array.from(dom.window.document.querySelectorAll('a')); // Convert the NodeList to a regualr array.
+	
+	for (let tag in foundUrls)
+	{
+		if (foundUrls[tag].hostname)
+		{
+			foundUrls[tag] = foundUrls[tag].toString(); // transform Anchor Elements to strings/text.
+			continue; // continue to not concatenate the baseUrl to it.
+		}
+
+		foundUrls[tag] =  baseUrl + foundUrls[tag]; // Appending a string to the an HTMLAnchorEelemnt transforms it into a string.
+	}
+	console.log("FoundURLs: " + foundUrls)
+
 	
 	return foundUrls;	  
 }
@@ -34,7 +46,7 @@ async function crawlPage(baseUrl, currentUrl, pages = {}) {
 		return pages;
 	}
 	let normCurrentUrl = urlNormalizer(currentUrl);
-	Console.log("NormalizedURL is: " + normCurrentUrl);
+	console.log("NormalizedURL is: " + normCurrentUrl);
 	
 	
 	try {
@@ -58,8 +70,8 @@ async function crawlPage(baseUrl, currentUrl, pages = {}) {
 		}		
 
 		//console.log(dataReceived);
-		return dataReceived;
-		//return getUrlFromHtml(dataReceived, currentUrl);	
+		//return dataReceived;
+		return getUrlFromHtml(dataReceived, currentUrl);	
 	}
 
 	catch (err)
@@ -72,7 +84,7 @@ async function crawlPage(baseUrl, currentUrl, pages = {}) {
 
 //crawlPage(thisUrl)
 
-urlNormalizer(getUrlFromHtml('<html><body><a href="https://goobeldegook.com">gobbrl</a> <a href="HTTPS://yahoo.com">jj</a></body></html>'))
+//urlNormalizer(getUrlFromHtml('<html><body><a href="https://goobeldegook.com">gobbrl</a> <a href="HTTPS://yahoo.com">jj</a></body></html>'))
 
 
 export {urlNormalizer};
